@@ -1,5 +1,7 @@
 # QPay Payment Forms for WordPress
 
+[![CI](https://github.com/qpay-sdk/qpay-wordpress/actions/workflows/ci.yml/badge.svg)](https://github.com/qpay-sdk/qpay-wordpress/actions)
+
 QPay V2 payment forms plugin for WordPress (no WooCommerce required).
 
 ## Install
