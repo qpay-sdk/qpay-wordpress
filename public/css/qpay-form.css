@@ -1,0 +1,15 @@
+.qpay-payment-form { max-width: 400px; margin: 20px auto; text-align: center; }
+.qpay-form-input { display: flex; flex-direction: column; gap: 12px; align-items: center; }
+.qpay-form-input label { font-weight: 600; }
+.qpay-amount { padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 16px; width: 200px; text-align: center; }
+.qpay-fixed-amount { font-size: 24px; font-weight: bold; margin: 0; }
+.qpay-pay-btn { background: #00B462; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 16px; cursor: pointer; }
+.qpay-pay-btn:hover { background: #009e56; }
+.qpay-pay-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.qpay-result { margin-top: 20px; }
+.qpay-qr { margin: 16px 0; }
+.qpay-banks { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: 16px 0; }
+.qpay-bank-link { display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; border: 1px solid #ddd; border-radius: 8px; text-decoration: none; color: #333; font-size: 14px; }
+.qpay-bank-link:hover { background: #f5f5f5; }
+.qpay-status { color: #666; margin-top: 12px; }
+.qpay-success { color: #00B462; font-weight: bold; font-size: 18px; }
