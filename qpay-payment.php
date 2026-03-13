@@ -2,14 +2,14 @@
 /**
  * Plugin Name: QPay Payment Forms
  * Description: QPay V2 payment forms for WordPress (no WooCommerce required)
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: QPay SDK
  * License: MIT
  */
 
 if (!defined('ABSPATH')) exit;
 
-define('QPAY_WP_VERSION', '1.0.0');
+define('QPAY_WP_VERSION', '1.0.1');
 define('QPAY_WP_PATH', plugin_dir_path(__FILE__));
 define('QPAY_WP_URL', plugin_dir_url(__FILE__));
 
