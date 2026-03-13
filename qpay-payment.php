@@ -62,22 +62,32 @@ add_action('wp_enqueue_scripts', function () {
 // AJAX
 QPay_Ajax::register();
 
-// REST API webhook
+// REST API webhook — QPay calls GET with ?qpay_payment_id=...
 add_action('rest_api_init', function () {
     register_rest_route('qpay/v1', '/webhook', [
-        'methods' => 'POST',
+        'methods' => 'GET',
         'callback' => function ($request) {
-            $invoice_id = $request->get_param('invoice_id');
-            if (!$invoice_id) return new WP_REST_Response(['error' => 'Missing invoice_id'], 400);
+            $payment_id = $request->get_param('qpay_payment_id');
+            if (!$payment_id) {
+                return new WP_REST_Response('FAILED', 400);
+            }
 
             $api = new QPay_API();
-            $result = $api->check_payment($invoice_id);
-            if ($result && !empty($result['rows'])) {
-                global $wpdb;
-                $wpdb->update($wpdb->prefix . 'qpay_payments', ['status' => 'paid'], ['invoice_id' => $invoice_id]);
-                return new WP_REST_Response(['status' => 'paid']);
+
+            // Get payment details to find the invoice_id
+            $payment = $api->get_payment($payment_id);
+            if ($payment && !empty($payment['object_id'])) {
+                $invoice_id = $payment['object_id'];
+
+                // Double-check payment via check_payment endpoint
+                $result = $api->check_payment($invoice_id);
+                if ($result && !empty($result['rows'])) {
+                    global $wpdb;
+                    $wpdb->update($wpdb->prefix . 'qpay_payments', ['status' => 'paid'], ['invoice_id' => $invoice_id]);
+                }
             }
-            return new WP_REST_Response(['status' => 'unpaid']);
+
+            return new WP_REST_Response('SUCCESS', 200);
         },
         'permission_callback' => '__return_true',
     ]);
